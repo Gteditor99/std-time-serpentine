@@ -1,0 +1,228 @@
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* -webkit-calendar-picker-indicator */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: red;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*# sourceMappingURL=styles.cs.map */
+
+/* modern look w/ smooth animations */
+/* Path: styles.css */
+
+/* <!DOCTYPE html>
+<html>
+  <head>
+    <title>Select Date and Time</title>
+    <!-- import css -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Select Date and Time</h1>
+
+    <label for="datetime-input">Choose a date and time:</label>
+    <input type="datetime-local" id="datetime-input" />
+
+    <button onclick="getSelectedDateTime()">Get Selected Date and Time</button>
+
+    <div id="console-output"></div>
+
+    <script>
+      function getSelectedDateTime() {
+        var datetimeInput = document.getElementById("datetime-input");
+        var selectedDateTime = datetimeInput.value;
+
+        var selectedDate = new Date(selectedDateTime);
+        var dayOfYear = getDayOfYear(selectedDate);
+        var formattedDateTime = formatTime(selectedDate);
+
+        var consoleOutput = "Day " + dayOfYear + " " + formattedDateTime;
+
+        var consoleOutputElement = document.getElementById("console-output");
+        consoleOutputElement.textContent = consoleOutput;
+      }
+
+      function getDayOfYear(date) {
+        var start = new Date(date.getFullYear(), 0, 4); // January 4th
+        var diff = date - start;
+        var oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+      }
+
+      function formatTime(date) {
+        var year = date.getFullYear();
+        var dayOfMonth = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        var month = date.getMonth() + 1; // Months are zero-indexed
+
+        // Pad single digit values with a leading zero
+        if (dayOfMonth < 10) {
+          dayOfMonth = "0" + dayOfMonth;
+        }
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        if (month < 10) {
+          month = "0" + month;
+        }
+
+        return (
+          hours +
+          ":" +
+          minutes +
+          ":" +
+          seconds +
+          " | " +
+          month +
+          "-" +
+          dayOfMonth +
+          "-" +
+          year.toString().slice(2)
+        );
+      }
+    </script>
+  </body>
+</html>
+ */
+
+h1 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 400;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* old crt look for the site*/
+
+:root {
+  --crt-bg: #000;
+  --crt-text: #fff;
+  --crt-border: #fff;
+}
+
+body {
+  background: var(--crt-bg);
+  color: var(--crt-text);
+  font-family: monospace;
+  padding: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  background: transparent;
+  border: 1px solid var(--crt-border);
+  color: var(--crt-text);
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: var(--crt-shadow);
+}
+
+button {
+  background: var(--crt-bg);
+  border: 1px solid var(--crt-border);
+  color: var(--crt-text);
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--crt-text);
+  color: var(--crt-bg);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: var(--crt-shadow);
+}
+
+#console-output {
+  margin-top: 0.5rem;
+  white-space: pre;
+}
+
+/* fonts */
+@font-face {
+  font-family: "dalmoori";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/dalmoori.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* apply font */
+:root {
+  --font-family: "HBIOS-SYS", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+}
+
+@font-face {
+  font-family: "HBIOS-SYS";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#console-output {
+  font-family: HBIOS-SYS, sans-serif;
+}
+
+footer {
+  /* dynamic footer */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  padding-left: 10px;
+  color: #616161;
+  font-family: HBIOS-SYS, sans-serif;
+}
+
+a {
+  color: #ffffff;
+}

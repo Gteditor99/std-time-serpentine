@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/flatpickr.min.js"></script>
+
+    <title>std time for 13SMU [Serpentine]</title>
+    <!-- import css -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Standard Time for 13th Special Missions Unit [Serpentine]</h1>
+
+    <label for="datetime-input">Choose a date and time:</label>
+    <button type="datetime-local" id="datetime-input">Open Calendar</button>
+
+    <button onclick="getSelectedDateTime()">Get Selected Date and Time</button>
+    <div id="console-output"></div>
+    <button id="copy-button" onclick="copyToClipboard()">
+      Copy to Clipboard
+    </button>
+
+    <script>
+      // Get the input element
+      var datetimeInput = document.getElementById("datetime-input");
+
+      // Initialize Flatpickr
+      var flatpickrInstance = flatpickr(datetimeInput, {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        onClose: function (selectedDates, dateStr, instance) {
+          // Store the selected option in a variable
+          var selectedDateTime = instance.selectedDates[0];
+
+          // Update the datetime-input value
+          datetimeInput.value = selectedDateTime
+            ? selectedDateTime.toLocaleString()
+            : "Click to Open Calendar";
+        },
+      });
+
+      // Set the initial value of datetime-input
+      datetimeInput.value = "Click to Open Calendar";
+
+      function getSelectedDateTime() {
+        var datetimeInput = document.getElementById("datetime-input");
+        var selectedDateTime = datetimeInput.value;
+
+        var selectedDate = new Date(selectedDateTime);
+        var dayOfYear = getDayOfYear(selectedDate);
+        var formattedDateTime = formatTime(selectedDate);
+
+        var consoleOutput = "Day " + dayOfYear + " " + formattedDateTime;
+
+        var consoleOutputElement = document.getElementById("console-output");
+        consoleOutputElement.textContent = consoleOutput;
+      }
+
+      function getDayOfYear(date) {
+        var start = new Date(date.getFullYear(), 0, 4); // January 4th
+        var diff = date - start;
+        var oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+      }
+
+      function formatTime(date) {
+        var year = date.getFullYear();
+        var dayOfMonth = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        var month = date.getMonth() + 1; // Months are zero-indexed
+
+        // Pad single digit values with a leading zero
+        if (dayOfMonth < 10) {
+          dayOfMonth = "0" + dayOfMonth;
+        }
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        if (month < 10) {
+          month = "0" + month;
+        }
+
+        return (
+          hours +
+          ":" +
+          minutes +
+          ":" +
+          seconds +
+          " | " +
+          month +
+          "-" +
+          dayOfMonth +
+          "-" +
+          year.toString().slice(2)
+        );
+      }
+
+      // Copy to Clipboard function
+      function copyToClipboard() {
+        var consoleOutputElement = document.getElementById("console-output");
+        var consoleOutput = consoleOutputElement.textContent;
+        navigator.clipboard
+          .writeText(consoleOutput)
+          .then(function () {
+            console.log("Copied to clipboard: " + consoleOutput);
+            showNotification("Copied time:", consoleOutput);
+          })
+          .catch(function (err) {
+            console.error("Failed to copy to clipboard: ", err);
+          });
+      }
+
+      // Notification function
+      function showNotification(title, message) {
+        if (Notification.permission === "granted") {
+          createNotification(title, message);
+        } else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then(function (permission) {
+            if (permission === "granted") {
+              createNotification(title, message);
+            }
+          });
+        }
+      }
+
+      // Create and display the notification
+      function createNotification(title, message) {
+        var options = {
+          body: message,
+          icon: "notification-icon.png", // Replace with your own notification icon URL
+        };
+
+        var notification = new Notification(title, options);
+
+        // Automatically close the notification after a few seconds
+        setTimeout(function () {
+          notification.close();
+        }, 5000);
+      }
+    </script>
+    <footer>
+      by <a href="https://github.com/gteditor99">@editor99</a> for
+      <a href="https://discord.gg/8k9PWfHPjY">Serpentine SOF</a> | |<a
+        href="https://github.com/gteditor99/std-time-serpentine"
+        >v0.1.0</a
+      >|
+    </footer>
+  </body>
+</html>
