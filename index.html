@@ -31,6 +31,7 @@
       var flatpickrInstance = flatpickr(datetimeInput, {
         enableTime: true,
         dateFormat: "Y-m-d H:i",
+        showNowButton: true,
         onClose: function (selectedDates, dateStr, instance) {
           // Store the selected option in a variable
           var selectedDateTime = instance.selectedDates[0];
