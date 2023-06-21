@@ -226,3 +226,7 @@ footer {
 a {
   color: #ffffff;
 }
+
+button {
+  font: inherit;
+}
